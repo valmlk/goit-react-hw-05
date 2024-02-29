@@ -1,0 +1,14 @@
+.list {
+list-style: none;
+}
+
+.item{
+color: black;
+padding-left: 6px;
+}
+
+.item:hover {
+    color: #53152E;
+    
+}
+

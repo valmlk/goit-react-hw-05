@@ -1,0 +1,22 @@
+.details {
+  margin: 24px;
+}
+
+.general {
+  display: flex;
+  gap: 24px;
+}
+
+.list {
+  list-style: none;
+}
+
+.item {
+  color: black;
+  padding-left: 6px;
+  text-decoration: none;
+}
+
+.item:hover {
+  color: #53152e;
+}

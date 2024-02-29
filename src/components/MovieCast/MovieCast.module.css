@@ -1,0 +1,15 @@
+.list {
+    list-style: none;
+}
+
+.item {
+display: flex;
+gap: 12px;
+padding-bottom: 12px;
+}
+
+.castinfo {
+display: flex;
+flex-direction: column;
+justify-content: space-evenly;
+}

@@ -1,0 +1,14 @@
+.container {
+    padding-left: 16px;
+    padding-top: 12px;
+}
+
+.backlink {
+    text-decoration: none;
+    color: black;
+
+}
+
+.backlink:hover {
+    color: #A3295B;
+}
