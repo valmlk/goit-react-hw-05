@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useSearchParams } from 'react-router-dom';
+import { useSearchParams} from 'react-router-dom';
 import { fetchMovies } from '../../services/api';
 import { Toaster } from 'react-hot-toast';
 import SearchBar from '../../components/SearchBar/SearchBar';
@@ -7,36 +7,32 @@ import MovieList from '../../components/MovieList/MovieList';
 import Loader from '../../components/Loader/Loader';
 import ErrorMessage from '../../components/ErrorMessage/ErrorMessage';
 
+
+
 export default function MoviesPage() {
   const [movies, setMovies] = useState([]);
   const [query, setQuery] = useState('');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
-
-  const searchMovies = async newQuery => {
-    setQuery(`${Date.now()}/${newQuery}`);
-    setMovies([]);
-  };
-
   const [params, setParams] = useSearchParams();
-  const search = params.get('query') ?? '';
 
-  const changeSearch = newQuery => {
-    params.set('query', newQuery);
-    setParams(params);
+  // const location = useLocation();
+
+  const searchMovies = async query => {
+    // params.set('query', );
+    setQuery(query);
+    setParams({query});
   };
 
   useEffect(() => {
-    if (query === '') {
-      return;
-    }
-    async function searchMovies() {
+    async function getMovies() {
+      const query = params.get('query');
+      if (!query) return;
       try {
         setLoading(true);
         setError(false);
-        const fetchedMovies = await fetchMovies(query.split('/')[1]);
-
-        setMovies(prevMovies => [...prevMovies, ...fetchedMovies]);
+        const fetchedMovies = await fetchMovies(query);
+        setMovies(fetchedMovies)
       } catch (error) {
         setError(true);
       } finally {
@@ -44,12 +40,12 @@ export default function MoviesPage() {
       }
     }
 
-    searchMovies();
-  }, [query]);
+    getMovies()
+  }, [query, params]);
 
   return (
     <div>
-      <SearchBar onSearch={searchMovies} value={search} onChange={changeSearch}></SearchBar>
+      <SearchBar onSearch={searchMovies}></SearchBar>
       {loading && <Loader />}
       {error && <ErrorMessage />}
       <MovieList movies={movies}></MovieList>

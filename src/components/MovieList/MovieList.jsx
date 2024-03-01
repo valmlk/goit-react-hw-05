@@ -3,7 +3,9 @@ import css from './MovieList.module.css'
 import { GiFilmProjector } from "react-icons/gi";
 
 const MovieList = ({movies}) => {
-  const location = useLocation()
+  const location = useLocation();
+
+  console.log(location)
   
   return (
     <ul className={css.list}>
